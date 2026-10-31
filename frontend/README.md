@@ -57,8 +57,9 @@ In production the built files call `/api/...` on their own origin, so whatever s
 Return an empty `foods` array (not an error) when nothing matches. Any non-2xx status shows an
 error message in the UI.
 
-In FDC the sugar nutrient is number `269`; some foods report it under more than one nutrient id,
-so match on the number.
+In FDC, total sugar is nutrient id `2000` (number `269`, "Total Sugars") for Branded, SR Legacy and
+Survey foods. Some Foundation foods only have id `1063` (number `269.3`, "Sugars, Total"), and some
+have both with the same value. Accept either, prefer `2000`, and never add them together.
 
 ## Layout
 
