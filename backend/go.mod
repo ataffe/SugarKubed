@@ -1,4 +1,4 @@
-module github.com/sugarkubed/backend
+module github.com/ataffe/SugarKubed/backend
 
 go 1.27.1
 

@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
-	v1 "github.com/sugarkubed/backend/internal/api/v1"
+	v1 "github.com/ataffe/SugarKubed/backend/internal/api/v1"
 )
 
 

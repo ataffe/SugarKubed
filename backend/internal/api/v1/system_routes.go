@@ -3,7 +3,7 @@ package v1
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/sugarkubed/backend/internal/handlers"
+	"github.com/ataffe/SugarKubed/backend/internal/handlers"
 )
 
 func registerSystemRoutes(router *gin.Engine) {
