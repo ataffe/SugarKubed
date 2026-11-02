@@ -1,0 +1,22 @@
+server {
+    listen 8080;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Forward API calls to the Go backend. BACKEND_URL must be just scheme://host:port
+    # (no path or trailing slash) so nginx passes the request path through unchanged.
+    location /api/ {
+        proxy_pass ${BACKEND_URL};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Single-page app: unknown paths fall back to index.html
+    location / {
+        try_files $uri /index.html;
+    }
+}

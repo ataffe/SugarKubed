@@ -8,7 +8,7 @@ export async function searchFoods(query, { signal } = {}) {
     return mockSearchFoods(query)
   }
 
-  const res = await fetch(`/api/foods/search?query=${encodeURIComponent(query)}`, { signal })
+  const res = await fetch(`/api/v1/foods/search?query=${encodeURIComponent(query)}`, { signal })
   if (!res.ok) {
     throw new Error(`The backend returned ${res.status}`)
   }
