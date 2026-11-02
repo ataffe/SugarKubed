@@ -1,0 +1,30 @@
+name: Backend
+
+on:
+  pull_request:
+    paths: ['backend/**', '.github/workflows/backend.yml']
+  push:
+    branches: [main]
+    paths: ['backend/**', '.github/workflows/backend.yml']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+      - name: Display Go version
+        run: go version
+      - name: Download dependencies
+        run: go mod download
+      - name: Build
+        run: go build -v ./...
+      - name: Test
+        run: go test -v ./...
