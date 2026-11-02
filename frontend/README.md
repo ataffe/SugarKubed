@@ -16,7 +16,7 @@ npm run build    # static files in dist/
 `src/mockFoods.js` (try searching "apple"). Once the Go backend is running, set it to `false`
 (or delete the line) and the app will call the backend instead.
 
-In dev, Vite proxies `/api/*` to `http://localhost:8080`. To point it elsewhere:
+In dev, Vite proxies `/api/*` to `http://localhost:8070`. To point it elsewhere:
 
 ```bash
 BACKEND_URL=http://localhost:9000 npm run dev
@@ -27,7 +27,7 @@ In production the built files call `/api/...` on their own origin, so whatever s
 
 ## API contract the frontend expects
 
-`GET /api/foods/search?query=apple`
+`GET /api/v1/foods/search?query=apple`
 
 ```json
 {
@@ -66,7 +66,7 @@ so match on the number.
 src/
   main.jsx             entry point
   App.jsx              page layout, search state, loading/error/empty states
-  api.js               searchFoods(): mock or fetch to /api/foods/search
+  api.js               searchFoods(): mock or fetch to /api/v1/foods/search
   mockFoods.js         canned data for development
   components/
     SearchBar.jsx

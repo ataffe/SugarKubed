@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api': process.env.BACKEND_URL ?? 'http://localhost:8080',
+      '/api': process.env.BACKEND_URL ?? 'http://localhost:8070',
     },
   },
 })
