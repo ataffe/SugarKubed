@@ -4,10 +4,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
-	"testing"
-	"net/http/httptest"
-	"net/http"
 	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 )
 
 func TestHealthCheck(t *testing.T) {

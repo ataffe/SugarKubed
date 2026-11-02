@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
-type SystemHandler struct {}
+type SystemHandler struct{}
 
 func NewSystemHandler() *SystemHandler {
 	return &SystemHandler{}
