@@ -24,5 +24,9 @@ func main() {
 
 	router := gin.Default()
 	v1.RegisterRoutes(router)
-	http.ListenAndServe(port, router)
+	err = http.ListenAndServe(port, router)
+	if err != nil {
+		slog.Error(err.Error())
+		os.Exit(1)
+	}
 }

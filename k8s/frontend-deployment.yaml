@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sugarkubed-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sugarkubed-frontend
+  template:
+    metadata:
+      labels:
+        app: sugarkubed-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: sugarkubed-frontend:v1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: frontend-port
+              containerPort: 8080
+          env:
+            - name: BACKEND_URL
+              value: "http://sugarkubed-backend-service:80"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: frontend-port
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: frontend-port
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
