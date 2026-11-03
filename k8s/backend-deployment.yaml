@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sugarkubed-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sugarkubed-backend
+  template:
+    metadata:
+      labels:
+        app: sugarkubed-backend
+    spec:
+      containers:
+        - name: backend
+          image: sugarkubed-backend:v1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: backend-port
+              containerPort: 8070
+          env:
+            - name: PORT
+              value: "8070"
+            - name: FDC_BASE_URL
+              value: "https://api.nal.usda.gov/fdc/v1"
+            - name: UPSTREAM_TIMEOUT
+              value: "10"
+          readinessProbe:
+            httpGet:
+              path: /api/v1/healthz
+              port: backend-port
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/healthz
+              port: backend-port
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            failureThreshold: 3
+          resources:
+                requests:
+                  cpu: 100m
+                  memory: 64Mi
+                limits:
+                  cpu: 250m
+                  memory: 128Mi
